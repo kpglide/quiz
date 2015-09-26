@@ -2,7 +2,7 @@ html {
     background-image: url("three_way_hole.jpg");
     background-position: center 120px;
     background-repeat: no-repeat;
-    background-size: auto 768px;
+    background-size: auto 640px;
     font-family: 'Gudea', sans-serif;
     font-size: 110%;
 }
@@ -17,22 +17,44 @@ h1 {
 	text-align: center;
 }
 
-#questions {
+#left-container {
 	float: left;
 	width: 30%;
-	text-align: right;
+	text-align: left;
+	margin-left: 10%;
 }
 
-#answer-choices {
+#question {
+	width: 75%;
 	/*add styles*/
 }
 
-#spacer {
-	width: 35%;
-	display: inline-block;
-}
-
-#answers {
+#right-container {
 	float: right;
 	width: 30%;
+}
+
+@media (max-width: 810px) {
+	
+	html {
+		background-position: center 300px;
+	}
+	h1 {
+		margin-bottom: 0;
+		margin-top: .5%;
+		font-size: 300%;
+	}
+
+	#right-container, #left-container {
+		padding-top: 0;
+		margin-top: 0;
+		width: 45%;
+		margin-right: auto;
+		margin-left: auto;
+	}
+
+	#left-container {
+		margin-left: 10%;
+	}
+
 }
