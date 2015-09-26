@@ -16,31 +16,39 @@ $(document).ready(function() {
 		'Andrews Links', 'Muirfield'], 2)
 
 	var question_list = [pinehurst_question, standrews_question];
-	var curent_question = question_list[question_counter];
+	var current_question = question_list[question_counter];
 
 	ask_question(question_counter, question_list);
 	
 	$('#submit').on('click', function(event) {
 		if (countChecked() == 0) {
 			return;	
+			console.log('none checked');
 		} else {
-			score(curent_question.correct_answer);
-			question_counter++;
-			ask_question(question_counter, question_list);
+			handleSubmission();
 		}
 	});
 
-	$('#submit').on('click', function(event) {
-		console.log('works');
-	});
+	function handleSubmission() {
+		current_question = question_list[question_counter];
+		report_results(score(current_question.correct_answer));
+		question_counter++;
+		if (question_counter < question_list.length) {
+			ask_question(question_counter, question_list);
+		} else {
+			$('#right-container').append('<h3>You are done</h3>');
+		}
+	}
 
 	function ask_question(number, questions) {
 		$('#question').empty();
 		question = questions[number];
-		$('#question-title').text(question.question);
+		$('#question').append('<h3>' + 'Q' + (number + 1) + ': ' +
+								question.question + '</h3>');
 		answers = question.answers;
 		for (var index = 0; index < answers.length; index++) {
-			answer_input = '<input type="radio" name="option" class="option" value="0">' +
+			answer_input = '<input type="radio" name="option" class="option"' +
+							' value=' + '"' + index + '">' +
 							'<span class="answer">' + answers[index] +
 							'</span><br>'
 			$('#question').append(answer_input);
@@ -50,6 +58,7 @@ $(document).ready(function() {
 	function score(correct_answer) {
 		//checks user answer against the correct answer
 		var user_answer = $('input:checked').val();
+		console.log(user_answer);
 		if (user_answer == correct_answer) {
 			return true;
 		} else {
@@ -62,7 +71,7 @@ $(document).ready(function() {
 			$("#right-container").text("That's correct, great job!");
 		} else {
 			$("#right-container").text("Nope, sorry, the correct answer is " +
-				current_question..answers[correct_answer]);
+				current_question.answers[current_question.correct_answer]);
 		}
 	}
 
