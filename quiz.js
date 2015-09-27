@@ -29,18 +29,26 @@ $(document).ready(function() {
 		}
 	});
 
+	function next() { 
+		if (question_counter < question_list.length) {
+			ask_question(question_counter, question_list);
+		} else {
+			$('#right-container').find('p').text('Quiz Over:  You scored ' +
+									number_correct + '/' + 
+									question_list.length);
+			$('#left-container').css('display', 'none');
+			$('#next').hide();
+		}
+	}
+
 	function handleSubmission() {
 		current_question = question_list[question_counter];
 		report_results(score(current_question.correct_answer));
 		question_counter++;
-		if (question_counter < question_list.length) {
-			ask_question(question_counter, question_list);
-		} else {
-			$('#right-container').append('<h3>You are done</h3>');
-		}
 	}
 
 	function ask_question(number, questions) {
+		$('#submit').show();
 		$('#question').empty();
 		question = questions[number];
 		$('#question').append('<h3>' + 'Q' + (number + 1) + ': ' +
@@ -67,12 +75,23 @@ $(document).ready(function() {
 	}
 
 	function report_results(score) {
+		var next_button = '<input id="next" type="button" value="Next">'
+
 		if (score) {
 			$("#right-container").text("That's correct, great job!");
+			$("#right-container").css('color', 'red');
+			number_correct++;
 		} else {
 			$("#right-container").text("Nope, sorry, the correct answer is " +
 				current_question.answers[current_question.correct_answer]);
+			$("#right-container").css('color', 'green');
 		}
+		$('#right-container').append('<p>Your score: ' + number_correct +
+									'/' + question_list.length + '</p>'
+									+ next_button);
+		$('#right-container p').css('color', 'black');
+		$('#submit').hide();
+		$('#next').on('click', next);
 	}
 
 	function Question(question, answers, correct_answer) {
