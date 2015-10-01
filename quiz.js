@@ -32,12 +32,15 @@ $(document).ready(function() {
 	function next() { 
 		if (question_counter < question_list.length) {
 			ask_question(question_counter, question_list);
+			$('.next').hide();
+			$('#right-or-wrong').hide();
 		} else {
+			$('#right-or-wrong').hide();
 			$('#right-container').find('p').text('Quiz Over:  You scored ' +
 									number_correct + '/' + 
 									question_list.length);
 			$('#left-container').css('display', 'none');
-			$('#next').hide();
+			$('.next').hide();
 		}
 	}
 
@@ -75,23 +78,24 @@ $(document).ready(function() {
 	}
 
 	function report_results(score) {
-		var next_button = '<input id="next" type="button" value="Next">'
+		var next_button = '<br class="next">' + '<input class="next" type="button" value="Next">'
 
+		$('#right-or-wrong').show();
 		if (score) {
-			$("#right-container").text("That's correct, great job!");
+			$("#right-or-wrong").text("That's correct, great job!");
 			$("#right-container").css('color', 'red');
 			number_correct++;
 		} else {
-			$("#right-container").text("Nope, sorry, the correct answer is " +
+			$("#right-or-wrong").text("Nope, sorry, the correct answer is " +
 				current_question.answers[current_question.correct_answer]);
 			$("#right-container").css('color', 'green');
 		}
-		$('#right-container').append('<p>Your score: ' + number_correct +
-									'/' + question_list.length + '</p>'
-									+ next_button);
+		$('#current-score').text('Current score: ' + number_correct +
+									'/' + (question_counter + 1)); 
+		$('#current-score').append(next_button);
 		$('#right-container p').css('color', 'black');
 		$('#submit').hide();
-		$('#next').on('click', next);
+		$('.next').on('click', next);
 	}
 
 	function Question(question, answers, correct_answer) {
