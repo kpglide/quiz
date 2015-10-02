@@ -7,15 +7,20 @@
 	<link href="styles.css" rel="stylesheet">
 	<link href='https://fonts.googleapis.com/css?family=Rancho' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Gudea' rel='stylesheet' type='text/css'>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
+	<script type="text/javascript" src="quiz.js"></script>
 </head>
 <body>
-	<header><h1 id="quiz-title">Golf Quiz</h1></header>
-	<div id="questions"><h3>Q: Questions will go here</h3>
-		<div id="answer-choices">
-			<input type="radio" name="option" class="option" value="0"><span class="answer">Potential answer</span><br>
-			<input type="radio" name="option" class="option" value="1"><span class="answer">Potential answers</span><br>
+	<header><h1 id="quiz-title">Golf Course Quiz</h1></header>
+	<div id="left-container">
+		<div id="question">
+			<h3 id="question-title">Q: Questions will go here</h3>
 		</div>
+		<input id="submit" type="button" value="Submit">
 	</div>
-	<div id="answers"><h3>A: Answers will go here</h3></div>
+	<div id="right-container"><h3></h3>
+		<p id="right-or-wrong"></p>
+		<p id="current-score"></p>
+	</div>
 </body>
 </html>
