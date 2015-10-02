@@ -24,6 +24,8 @@ h1 {
 }
 
 #answer-choices {
+	margin-left: 65%;
+	text-align: left;
 	/*add styles*/
 }
 
